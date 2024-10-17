@@ -1,0 +1,122 @@
+---
+title: ""
+author: "Mauriah Allen"
+date: '2024-10-03'
+format:
+  html:
+    code-fold: true
+---
+
+```{r}
+library(tidyverse)
+library(cfbfastR)
+```
+
+```{r}
+gamedata <- load_cfb_pbp(
+  seasons = c(2019,2020,2021,2023,2024),
+  dbConnection = NULL,
+  tablename = NULL
+)
+```
+
+### **Filtering out third and six data**
+
+\\\]
+
+```{r}
+third_and_six <- gamedata|> filter(down == "3", distance == "6")
+```
+
+```{r}
+third_and_six |> group_by(rush) |> summarise(count=n()) 
+```
+
+There are 2570 rushing plays on 3rd and 6 and 9396 other type of plays that occur on 3rd and 6.
+
+### Percentage of rushing plays on 3rd and 6.
+
+```{r}
+2570/11966*100 
+```
+
+21% of plays on 3rd and 6 are run plays.
+
+### What is the average yards gained?
+
+```{r}
+rushingdata <- third_and_six |> filter(rush == 1 ) 
+
+avg_yards_gained <- rushingdata|> 
+  group_by(pos_team) |> 
+  summarise(avg_yards_gained = mean(yards_gained, na.rm = TRUE))
+
+```
+
+### How many times has any team run on 3rd and 6 each year we have data for? Which team has done it the most?
+
+```{r}
+totalrunson3and6 <- rushingdata |> group_by(pos_team, year) |> summarise(count=n())
+
+yearbyyear <-totalrunson3and6 |> group_by(year) |> summarise(count=n())
+```
+
+In 2019 there were 152 running plays, in 2020 there were 118 running plays, in 2021 there were 150 running plays, in 2023 there were 247 running plays and in 2024 there were 199 running plays on 3rd and 6.
+
+Army has ran the most on 3rd and 6. In 2021 they ran the ball 17 times, on 3rd and 6.
+
+### Bar Chart of how many runs were on 3rd and 6 over the years.
+
+```{r}
+ggplot() + 
+  geom_bar(
+    data=yearbyyear, 
+    aes(x=reorder(year, count),
+        weight=count)) + 
+  labs(
+    title="How many runs occur on 3rd and 6?", 
+    x="Year", 
+    y="Count") + 
+  theme_minimal()
+```
+
+# **Maryland data**
+
+```{r}
+md_data <- third_and_six |> filter(pos_team == "Maryland")
+
+md_data |> group_by(play_type, year) |> summarise(count=n()) 
+```
+
+### changes over the years
+
+```{r}
+mdrushdata <- rushingdata |> filter(pos_team == "Maryland") |> group_by(play_type, year) |> summarise(count=n())
+```
+
+In 2021 and 2023 Maryland has ran the ball the most on 3rd and 6th, doing this 4 times each season. In 2019 and 2024 Maryland has not ran the ball much in 3rd and 6, only doing it 1 time so far.
+
+### What percentage of the time does Maryland run the ball
+
+```{r}
+11/52*100
+```
+
+21% percent of the time Maryland runs the ball on 3rd and 6, over the years. They had a total number of 11 rushing plays on third and six, and they had a total number of 52 plays in total on third and six.
+
+### Graphing Maryland changes over the years 
+
+```{r}
+ggplot() + 
+  geom_bar(
+    data=mdrushdata, 
+    aes(x=reorder(year, count),
+        weight=count)) + 
+  labs(
+    title="How many runs occur on 3rd and 6? for Maryland", 
+    x="Year", 
+    y="Count") + 
+  theme_minimal()
+```
+
+This shows a lot!!! Maryland didn't typically run the ball in 2019 that much on third and six, but in 2021 and 2023 they did more. However after that horrible play last year, it seems that Maryland has went back to not running the ball that much on third and six. However Maryland's average for how many rushing plays they have is the same average as the average for total number of rushing plays for all teams, so they don't typically run the ball that much on third and six like many other teams.
