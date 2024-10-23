@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/closerushingyards/index.html",
       "/posts/Volleyballpost/index.html",
       "/posts/bigtenplays/index.html",
       "/posts/post-with-code/index.html",
@@ -9,5 +10,9 @@
       "/posts/thirdandsix/index.html",
       "/posts/welcome/index.html"
     ]
+  },
+  {
+    "listing": "/posts/closerushingyards/index.html",
+    "items": []
   }
 ]
