@@ -4,6 +4,7 @@
     "items": [
       "/posts/misc/index.html",
       "/posts/presentation/presentation.html",
+      "/posts/kevinwillard/index.html",
       "/posts/mbbearlyszn/index.html",
       "/posts/runningonempty/index.html",
       "/posts/volleyballaces/index.html",
@@ -35,6 +36,10 @@
   },
   {
     "listing": "/posts/mbbearlyszn/index.html",
+    "items": []
+  },
+  {
+    "listing": "/posts/kevinwillard/index.html",
     "items": []
   }
 ]
