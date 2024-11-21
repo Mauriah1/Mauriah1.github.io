@@ -4,6 +4,7 @@
     "items": [
       "/posts/misc/index.html",
       "/posts/presentation/presentation.html",
+      "/posts/nbalineups/index.html",
       "/posts/kevinwillard/index.html",
       "/posts/mbbearlyszn/index.html",
       "/posts/runningonempty/index.html",
@@ -40,6 +41,10 @@
   },
   {
     "listing": "/posts/kevinwillard/index.html",
+    "items": []
+  },
+  {
+    "listing": "/posts/nbalineups/index.html",
     "items": []
   }
 ]
